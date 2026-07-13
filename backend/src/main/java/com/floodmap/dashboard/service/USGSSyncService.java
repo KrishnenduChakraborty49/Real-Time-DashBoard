@@ -34,8 +34,7 @@ public class USGSSyncService {
         String url = "https://waterservices.usgs.gov/nwis/iv/?format=json&stateCd=ks&parameterCd=00065";
         
         try {
-            String response = restTemplate.getForObject(url, String.class);
-            JsonNode root = objectMapper.readTree(response);
+            JsonNode root = restTemplate.getForObject(url, JsonNode.class);
             JsonNode timeSeries = root.path("value").path("timeSeries");
             
             List<FloodDataDTO> updates = new ArrayList<>();
