@@ -16,7 +16,8 @@ const Users: React.FC = () => {
             const token = localStorage.getItem('token');
             if (!token) return;
             try {
-                const res = await fetch('http://localhost:8080/api/admin/users', {
+                const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+                const res = await fetch(`${API_URL}/api/admin/users`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (res.ok) {
@@ -33,7 +34,8 @@ const Users: React.FC = () => {
         if (!window.confirm("Are you sure you want to delete this user?")) return;
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+            const res = await fetch(`${API_URL}/api/admin/users/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

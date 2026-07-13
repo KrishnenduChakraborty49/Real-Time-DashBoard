@@ -16,8 +16,9 @@ const Analytics: React.FC = () => {
                 const token = localStorage.getItem('token');
                 const headers = { 'Authorization': `Bearer ${token}` };
 
-                const trendRes = await fetch(`http://localhost:8080/api/analytics/historical?startDate=${format(startDate, 'yyyy-MM-dd')}&endDate=${format(endDate, 'yyyy-MM-dd')}`, { headers });
-                const distRes = await fetch('http://localhost:8080/api/analytics/distribution', { headers });
+                const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+                const trendRes = await fetch(`${API_URL}/api/analytics/historical?startDate=${format(startDate, 'yyyy-MM-dd')}&endDate=${format(endDate, 'yyyy-MM-dd')}`, { headers });
+                const distRes = await fetch(`${API_URL}/api/analytics/distribution`, { headers });
 
                 if (trendRes.ok) setTrendData(await trendRes.json());
                 if (distRes.ok) setDistributionData(await distRes.json());
