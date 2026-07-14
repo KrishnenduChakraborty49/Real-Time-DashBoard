@@ -71,6 +71,7 @@ public class USGSSyncService {
                 else if (gaugeHeight >= station.getMinorFloodStage()) status = "minor";
                 else if (gaugeHeight >= station.getActionStage()) status = "action";
 
+                station.setStatus(status);
                 station.setLastUpdated(LocalDateTime.now());
                 stationRepository.save(station);
                 
